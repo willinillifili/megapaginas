@@ -5,6 +5,7 @@
     Megapaginas
   </title>
   <meta charset="UTF-8">
+  <!-- que en mobil el searchbar sea igual de ancho -->
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://kit.fontawesome.com/6228ba2463.js" crossorigin="anonymous"></script>
@@ -66,7 +67,12 @@
             <div class="directory-header flex-row">BUSQUEDA POR CATEGORIAS</div>
             <div class="directory-body flex-column">
               <!--reference point for jquery "insertBefore"-->
-              <div class='directory-item letter-index flex-column'>A</div>
+              <div class='directory-item letter-index flex-row'>
+                A
+                <span class="category-dropdown-arrow">
+                  <img alt="dd-arrow" src="./assets/icons/dd-arrow.png"/>
+                </span>
+              </div>
               <div id="marker"></div>
               <!--div class="directory-item flex-column">Categoria</div-->
             </div>
@@ -85,5 +91,8 @@
     <div>Copyright 2020 Interzonga Communications</div>
     <a href="https://www.vecteezy.com/free-vector/buddha">Buddha Vectors by Vecteezy</a>
     <a href="https://www.freepik.com/free-photos-vectors/school">School vector created by macrovector - www.freepik.com</a>
+    <a target="_blank" href="https://icons8.com/icons/set/expand-arrow--v1">
+      Expand Arrow icon</a>
+      icon by <a target="_blank" href="https://icons8.com">Icons8</a>
   </footer>
   </html>

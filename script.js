@@ -76,6 +76,12 @@ $(document).ready(function(){
     $("#nav-items").removeClass("nav-items");
   });
 
+  //expand/collapse categories
+  /*$(".category-dropdown-arrow").click(function() {
+    var categories = $(this).next();
+    if ()
+  });*/
+
   //yellow pages render directory
   const categories = ["abogados", "aires acondicionados", "alquiler", "auto",
     "auto essentials", "bar", "belleza y salud", "bicicletas","bienes raices",
@@ -96,11 +102,16 @@ $(document).ready(function(){
   currentLetter = 'a';
   for (cat of categories) {
     if (cat[0] > currentLetter) {
-      $("<div class='directory-item letter-index flex-column'>"+cat[0]+"</div>")
-      .insertBefore("#marker");
+      $("<div class='directory-item letter-index flex-row'>"+
+                cat[0] +
+                '<span class="category-dropdown-arrow">' +
+                  '<img alt="dd-arrow" src="./assets/icons/dd-arrow.png"/>' +
+                '</span>' +
+              '</div>').insertBefore("#marker");
       currentLetter = cat[0];
     }
-    $("<div class='directory-item flex-column'><a href='./mega-paginas-results.html'>"+cat+"</a></div>")
+    $("<div class='directory-item flex-column category-item'>"+
+    "<a href='./mega-paginas-results.html'>"+cat+"</a></div>")
     .insertBefore("#marker");
   }
 
