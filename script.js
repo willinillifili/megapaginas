@@ -1,4 +1,18 @@
 $(document).ready(function(){
+  const isMobile = $("#device-check").css("display") == "block";
+
+  //sticky navbar
+  var bannerPos = $(".mp-banner").offset().top;
+  $(document).scroll(function() {
+    console.log($(this).scrollTop());
+    if ($(this).scrollTop() >= bannerPos - 75) {
+      $(".navbar").addClass("fill-navbar");
+    }
+    else {
+      $(".navbar").removeClass("fill-navbar");
+    }
+  });
+
   //menu item hover
   $(".nav-item").hover(
     function(){
@@ -82,38 +96,85 @@ $(document).ready(function(){
     if ()
   });*/
 
-  //yellow pages render directory
-  const categories = ["abogados", "aires acondicionados", "alquiler", "auto",
-    "auto essentials", "bar", "belleza y salud", "bicicletas","bienes raices",
-    "camas", "cerrajero", "contabilidad y consultoria", "contratista", "dealer",
-    "detectives", "ebanisteria", "empleo", "empleos", "energia renovable",
-    "estimador", "exterminadores", "empleador", "fumigacion", "gatos en venta",
-    "generadores electricos", "grua", "inc", "jardineria", "laboratorio clinico",
-    "licores y picadera", "limpiezas", "manufactura", "masajes", "mascotas",
-    "mecanica", "medico", "maquina de presion", "medicos", "oferta", "pequeno",
-    "perro", "piezas de auto", "pintor", "pintura y construccion",
-    "plantas y construccion", "plantas electricas", "plomeria", "prendas",
-    "real estate", "refrigeracion", "remolque", "reparacion",
-    "reparacion de residencias", "salud", "salon de bellezas", "servicios",
-    "servicios selado de techos", "suplidor", "sv casa",
-    "terminacion y construccion", "textiles", "transportacion", "venderlo",
-    "venta de frappe y frituras"];
+  //get categories and corresponding quantites from div#data.
+  //we assume data in div#data is formatted as
+  //'category1,quantity1,category2,quantity2...'.
+  //Further, we assume there are no blank spaces between commas.
+  //we'll modify this later so that data can be written to div#data with spaces
+  //between commas
+  var parsedCategoriesData = [];
+  const data = $("#data").text();
+  parsedCategoriesData = data.replace(/\n/g, '').split(',');
 
+  //format parsedCategoriesData as an array of values of the form [category, #],
+  //store resulting array in categories
+  var categories = [];
+  for (let i = 0; i < parsedCategoriesData.length; i++) {
+    category = parsedCategoriesData[i];
+    quantity = parsedCategoriesData[i+1];
+    var temp = [];
+    temp.push(category);
+    temp.push(quantity);
+    categories.push(temp);
+    i++; //skip to start of next "category, quantity" pair
+  }
+
+  //render. Place in alpabetical order
   currentLetter = 'a';
+  query = "https://megapaginas.com/cgi-bin/mega.cgi?n=PR&c="
   for (cat of categories) {
-    if (cat[0] > currentLetter) {
+    let firstLetter = cat[0][0];
+    let category = cat[0];
+    let quantity = cat[1];
+    if (firstLetter > currentLetter) {
+      //insert new Letter Separator
       $("<div class='directory-item letter-index flex-row'>"+
-                cat[0] +
+                firstLetter +
                 '<span class="category-dropdown-arrow">' +
                   '<img alt="dd-arrow" src="./assets/icons/dd-arrow.png"/>' +
                 '</span>' +
               '</div>').insertBefore("#marker");
-      currentLetter = cat[0];
+      //then insert new category container. This could be inside previous
+      //jquery function. I find it to be more readable like this.
+      $('<div id="cat-container-'+firstLetter+'"'+
+      'class="categories-container"></div>').insertBefore("#marker")
+      currentLetter = firstLetter;
     }
     $("<div class='directory-item flex-column category-item'>"+
-    "<a href='./mega-paginas-results.html'>"+cat+"</a></div>")
-    .insertBefore("#marker");
+    "<a href='"+ query + category +"'>"+category+"("+quantity+")"+
+    "</a></div>").appendTo("#cat-container-" + currentLetter);
   }
+
+  //click handler for category expansion
+  $(".category-dropdown-arrow").click(function() {
+    var categoriesContainer = $(this).parent().next();
+    var directoryItemHeight = 60;
+    var hasForwardsAnim = $(this).hasClass("rotate");
+    if (hasForwardsAnim) {
+      $(this).removeClass("rotate");
+      $(this).addClass("rev-rotate")
+      categoriesContainer.css("height", "auto");
+      $(".category-item").css("width", "auto");
+      categoriesContainer.css("display", "none");
+      return;
+    }
+    $(this).removeClass("rev-rotate");
+    $(this).addClass("rotate");
+    categoriesContainer.css("display", "flex");
+    //format categories-container dimensions
+    //so that categories will be displayed as two-column tables
+    if (categoriesContainer.children().length > 1 && !isMobile) {
+      renderHeight = categoriesContainer.height() / 2;
+      renderWidth = categoriesContainer.width() / 2;
+      //if there are an odd number of categories we add extra unit of height
+      //to avoid default third column from flex-wrap
+      if (categoriesContainer.children().length % 2 == 1) {
+        renderHeight = renderHeight + directoryItemHeight;
+      }
+      categoriesContainer.css("height", ""+renderHeight+"");
+      $(".category-item").css("width", ""+renderWidth+"")
+    }
+  });
 
   //serve yellowpages ads
   const ads = [

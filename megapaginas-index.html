@@ -27,9 +27,21 @@
         <img src="./assets/megalogo.png"/>
       </div>
       <div id="nav-items">
-        <div class="nav-item account-action">ACCEDER</div>
-        <div class="nav-item account-action">REGISTRARSE</div>
-        <div class="nav-item account-action">PREMIUM</div>
+        <div class="nav-item account-action">
+          <a
+          href="https://www.clasificadoselectronicos.com/cgi-bin/micuenta.cgi">
+          ACCEDER</a>
+        </div>
+        <div class="nav-item account-action">
+          <a
+          href="https://www.clasificadoselectronicos.com/puertorico/regusuario.htm">
+          REGISTRARSE</a>
+        </div>
+        <div class="nav-item account-action">
+          <a
+          href="https://www.clasificadoselectronicos.com/html-files/premium.htm">
+          PREMIUM</a>
+        </div>
       </div>
     </div>
     </div>
@@ -48,15 +60,19 @@
           <span id="text">Un mundo de servicios. <br>A tu alcance.</span>
           <div class="search-tools-yellowpages">
             <div class="searchbar searchbar-yellowpages">
-              <form action="" class="centralize-row">
-                <input type="text" placeholder="que (y donde).." name="search">
-                <button class="centralize" type="submit">
-                  <span style="color: white;">
-                    <i class="fa fa-search fa-2x"></i>
-                    <span>
-                    </button>
-                  </form>
-                </div>
+              <form
+              action="https://www.clasificadoselectronicos.com/cgi-bin/getadx.cgi"
+              method="post"
+              class="centralize-row">
+              <input type="text" placeholder="que (y donde).." name="keyword">
+              <input type="hidden" name="country" size="12" value="PR">
+              <button class="centralize" type="submit">
+                <span style="color: white;">
+                  <i class="fa fa-search fa-2x"></i>
+                  <span>
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
           <div class="mp-banner-graphic">
@@ -73,11 +89,41 @@
                   <img alt="dd-arrow" src="./assets/icons/dd-arrow.png"/>
                 </span>
               </div>
+              <div id="cat-container-a" class="categories-container">
+              </div>
               <div id="marker"></div>
               <!--div class="directory-item flex-column">Categoria</div-->
             </div>
           </div>
         </div>
+        <div id="device-check"><!-- will be displayed if mobile,
+          invisible if otherwise-->
+        </div>
+        <div id="data" style="display : none;">
+abogados,#,aires acondicionados,#,alquiler,#,auto,#,
+auto essentials,#,bar,#,belleza y salud,#,bicicletas,#,
+bienes raices,#,
+camas,#,cerrajero,#,contabilidad y consultoria,#,contratista,#,
+dealer,#,
+detectives,#,ebanisteria,#,empleo,#,empleos,#,energia renovable,#,
+estimador,#,exterminadores,#,empleador,#,fumigacion,#,
+gatos en venta,#,
+generadores electricos,#,grua,#,inc,#,jardineria,#,
+laboratorio clinico,#,
+licores y picadera,#,limpiezas,#,manufactura,#,masajes,#,
+mascotas,#,
+mecanica,#,medico,#,maquina de presion,#,medicos,#,oferta,#,
+pequeno,#,
+perro,#,piezas de auto,#,pintor,#,pintura y construccion,#,
+plantas y construccion,#,plantas electricas,#,plomeria,#,
+prendas,#,
+real estate,#,refrigeracion,#,remolque,#,reparacion,#,
+reparacion de residencias,#,salud,#,salon de bellezas,#,
+servicios,#,
+servicios selado de techos,#,suplidor,#,sv casa,#,
+terminacion y construccion,#,textiles,#,transportacion,#,
+venderlo,#,
+venta de frappe y frituras,#</div>
         <!--div class="options centralize-row">
           <div class="option"><u>Mi Cuenta</u></div>
           <div class="option"><u>Contacto</u></div>

@@ -46,6 +46,37 @@
   animation-fill-mode: forwards;
 }
 
+/* rotate effect for dropdown arrows*/
+@keyframes rotate {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(180deg) }
+}
+
+@-webkit-keyframes rotate {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(180deg) }
+}
+
+.rotate {
+  animation: rotate 0.3s forwards;
+  -webkit-animation: rotate 0.3s forwards;
+}
+
+@keyframes slideDown {
+  0% { display: none}
+  100% {display : flex}
+}
+
+@-webkit-keyframes slideDown {
+  0% { display : none}
+  100% {display : flex}
+}
+
+.slideDown {
+  animation: slideDown 0.3s forwards;
+  -webkit-animation: slideDown 0.3s forwards;
+}
+
 body {
   margin: 0px;
   overflow-x: hidden;
@@ -131,6 +162,10 @@ ai-flex-start {
   align-items: center;
 }
 
+#device-check{
+ display: block;
+}
+
 .nav-items {
   font-weight: bold;
   font-family: arial;
@@ -183,15 +218,7 @@ ai-flex-start {
 }
 
 .layer {
-  position: absolute;
-  top: 0;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-}
-
-.layer {
-  position: absolute;
+  position: fixed;
   display: block;
   top: 0px;
   bottom: 0px;
@@ -319,7 +346,7 @@ tight-contain {
 
 .search-tools-yellowpages {
   height: 30px;
-  width: 60%;
+  width: 80%;
   margin: 20px 0px 20px 0px;
 }
 
@@ -361,7 +388,7 @@ tight-contain {
 .directory-body {
   height: 510px;
   flex-wrap: nowrap;
-  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 a {
@@ -372,6 +399,12 @@ a {
 a:hover {
   color: var(--logo-bluegreen);
   text-decoration: underline;
+}
+
+.categories-container {
+  display: none;
+  flex-direction: column;
+  align-items: space-evenly;
 }
 
 .directory-item {
@@ -385,6 +418,7 @@ a:hover {
 .letter-index {
   background: var(--green);
   font-size: 150%;
+  border-bottom: 1px solid grey;
 }
 
 .letter-index:hover {
@@ -592,6 +626,14 @@ form span i{
 
 @media only screen and (min-width : 800px) {
 
+  .main-container {
+    margin-top: 100px;
+  }
+
+  #device-check {
+    display: none;
+  }
+
   .main {
     width: 80%;
   }
@@ -609,6 +651,13 @@ form span i{
     height: auto;
     //box-shadow: 0px 0px 30px;
     margin-bottom: 100px;
+  }
+
+  .categories-container {
+    display: none;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: space-evenly;
   }
 
   .directory-header {
@@ -833,14 +882,24 @@ form span i{
   }
 
   .navbar {
+    position: fixed;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    top: 0px;
+    z-index: 3;
     background: transparent;
-    padding-top: 15px;
     width: 100%;
     height: 80px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+  }
+
+  .fill-navbar {
+    background: #2D2D31;
+    box-shadow: 0px 0px 10px black;
   }
 
   .nav-content  {
@@ -858,7 +917,7 @@ form span i{
     width: 35%;
   }
 
-  .nav-item {
+  .nav-item a{
     font-size: 80%;
     margin: 0px 30px;
     cursor: pointer;
@@ -924,7 +983,7 @@ form span i{
     justify-content: space-between;
     align-items: flex-start;
     background: rgba(255,255,255, 1);
-    height: 50px;
+    height: auto;
     width: 100%;
   }
 
