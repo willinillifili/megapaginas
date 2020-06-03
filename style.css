@@ -17,6 +17,7 @@
   --black: rgba(0, 0, 0, 0.8);
   --dark-green: #00bb67;
   --green: #DDFE81;
+  --green-lite: rgba(86.7%, 99.6%, 50.6%, 0.7);
 }
 
 @keyframes scroll-right {
@@ -353,10 +354,15 @@ tight-contain {
 .searchbar {
   height: 100%;
   background: var(--logo-yellow);
+  transition: box-shadow 0.5s;
 }
 
 .searchbar input {
   height: 100%;
+}
+
+.searchbar input:focus {
+  outline: none;
 }
 
 .account-action {
@@ -405,6 +411,7 @@ a:hover {
   display: none;
   flex-direction: column;
   align-items: space-evenly;
+  transition: display 1s;
 }
 
 .directory-item {
@@ -416,9 +423,9 @@ a:hover {
 }
 
 .letter-index {
-  background: var(--green);
+  background: var(--green-lite);
   font-size: 150%;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid white;
 }
 
 .letter-index:hover {
@@ -676,28 +683,30 @@ form span i{
 
   a {
     color : black;
-    font-family: 'Montserrat';
+    font-family: 'Roboto';
+	transition: color 0.25s;
   }
 
   a:hover {
-    color: var(--logo-bluegreen);
-    text-decoration: underline;
+    text-decoration: none;
   }
 
   .directory-item {
     padding: 20px;
-    font-size: 100%;
+    font-size: 110%;
     height: 20px;
     color: black;
     text-transform: capitalize;
+	background: transition;
+	transition: background-color 0.25s;
   }
 
   .directory-item:hover {
-    background: lightgrey;
+    background-color: rgba(0,0,0,0.055);
   }
 
   .letter-index {
-    background: var(--green);
+    background: var(--green-lite);
     font-size: 150%;
   }
 
@@ -895,6 +904,7 @@ form span i{
     flex-direction: row;
     justify-content: center;
     align-items: center;
+	transition: background 1s;
   }
 
   .fill-navbar {
@@ -994,6 +1004,10 @@ form span i{
   footer a {
     font-size: 80%;
     color: grey;
+  }
+  
+  .mp-banner, .nav-content, .directory {
+	  width: 69%;
   }
 
 }

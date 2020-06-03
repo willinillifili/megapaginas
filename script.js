@@ -89,7 +89,7 @@ $(document).ready(function(){
     $(".countries-dropdown").removeClass("dropdown-fx");
     $("#nav-items").removeClass("nav-items");
   });
-
+  
   //expand/collapse categories
   /*$(".category-dropdown-arrow").click(function() {
     var categories = $(this).next();
@@ -141,7 +141,7 @@ $(document).ready(function(){
       currentLetter = firstLetter;
     }
     $("<div class='directory-item flex-column category-item'>"+
-    "<a href='"+ query + category +"'>"+category+"("+quantity+")"+
+    "<a href='"+ query + category +"'>"+category+" ("+quantity+")"+
     "</a></div>").appendTo("#cat-container-" + currentLetter);
   }
 
