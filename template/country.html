@@ -1,0 +1,20 @@
+<div id="country" class="countries">
+  <div class="country current-country pointer">
+      <div class="flag">
+        <img src="{{currentURL}}"/>
+      </div>
+      <span class="name capitalize"> {{currentName}} </span>
+  </div>
+  <div class="country-dropdown">
+  {{#country}}
+    <div id="{{code}}" class="country country-option pointer">
+       <div class="flag">
+          <img alt="flag" src="assets/images/flags/{{name}}.gif"/>
+          </div>
+        <div class="name capitalize">
+          {{name}}
+          </div>
+      </div>
+  {{/country}}
+  </div>
+</div>

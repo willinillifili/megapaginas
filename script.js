@@ -4,7 +4,6 @@ $(document).ready(function(){
   //sticky navbar
   var bannerPos = $(".mp-banner").offset().top;
   $(document).scroll(function() {
-    console.log($(this).scrollTop());
     if ($(this).scrollTop() >= bannerPos - 75) {
       $(".navbar").addClass("fill-navbar");
     }
@@ -89,7 +88,7 @@ $(document).ready(function(){
     $(".countries-dropdown").removeClass("dropdown-fx");
     $("#nav-items").removeClass("nav-items");
   });
-  
+
   //expand/collapse categories
   /*$(".category-dropdown-arrow").click(function() {
     var categories = $(this).next();
@@ -146,33 +145,64 @@ $(document).ready(function(){
   }
 
   //click handler for category expansion
-  $(".category-dropdown-arrow").click(function() {
-    var categoriesContainer = $(this).parent().next();
-    var directoryItemHeight = 60;
-    var hasForwardsAnim = $(this).hasClass("rotate");
-    if (hasForwardsAnim) {
-      $(this).removeClass("rotate");
-      $(this).addClass("rev-rotate")
-      categoriesContainer.css("height", "auto");
-      $(".category-item").css("width", "auto");
-      categoriesContainer.css("display", "none");
-      return;
-    }
-    $(this).removeClass("rev-rotate");
-    $(this).addClass("rotate");
-    categoriesContainer.css("display", "flex");
-    //format categories-container dimensions
-    //so that categories will be displayed as two-column tables
-    if (categoriesContainer.children().length > 1 && !isMobile) {
-      renderHeight = categoriesContainer.height() / 2;
-      renderWidth = categoriesContainer.width() / 2;
-      //if there are an odd number of categories we add extra unit of height
-      //to avoid default third column from flex-wrap
-      if (categoriesContainer.children().length % 2 == 1) {
-        renderHeight = renderHeight + directoryItemHeight;
+  $(".letter-index").click(function() {
+    var categoriesContainer = $(this).next();
+    var arrow = $(this).children(".category-dropdown-arrow");
+    var items = categoriesContainer.children(".category-item");
+    var directoryItemHeight = items.outerHeight();
+    const expanded = items.hasClass("show-items");
+    const categoriesAreExpanded = categoriesContainer.css("display") == "flex";
+    if (isMobile) {
+
+      if (!categoriesAreExpanded) {
+        arrow.addClass("rotate");
+        categoriesContainer.css("display", "flex");
+        toggle = 1;
       }
-      categoriesContainer.css("height", ""+renderHeight+"");
-      $(".category-item").css("width", ""+renderWidth+"")
+
+      else {
+        arrow.removeClass("rotate");
+        categoriesContainer.css("display", "none");
+        toggle = 0;
+      }
+
+    }
+
+    else {
+    	if (items.length > 1 && !isMobile) {
+        renderHeight = calculateContainerHeight(categoriesContainer) / 2;
+        renderWidth = categoriesContainer.width() / 2;
+
+    	  //if there are an odd number of categories we add extra unit of height
+        //to avoid default third column from flex-wrap
+
+    	  if (items.length % 2 == 1) {
+            renderHeight = renderHeight + directoryItemHeight;
+          }
+      }
+
+    	if (items.length == 1 && !isMobile) {
+    		renderHeight = directoryItemHeight;
+    	}
+
+    	if (!expanded) {
+        arrow.addClass("rotate");
+    	  categoriesContainer.css("height", ""+renderHeight+"");
+        $(".category-item").css("width", ""+renderWidth+"");
+    	  categoriesContainer.addClass("show-categories");
+    	  items.addClass("show-items");
+      }
+
+    	else if (expanded){
+    		arrow.removeClass("rotate");
+    	  categoriesContainer.css("height", "0px");
+    		items.removeClass("show-items");
+    		//categoriesContainer.removeClass("show-categories");
+    	}
+
+      // We want categories to be displayed as two-column tables.
+    	// strategy is to set categoriesContainer height to half of
+    	// auto height and let flex wrap do the rest.
     }
   });
 
@@ -357,3 +387,14 @@ $(document).ready(function(){
           '</div>').insertBefore("#comments-insert-point");
         }
 });
+
+
+/* helpers */
+
+// replicates behavior of css height : auto
+
+function calculateContainerHeight(container) {
+	var numberOfChildren = container.children().length;
+	var heightOfChildren = container.children().outerHeight();
+	return numberOfChildren * heightOfChildren;
+}

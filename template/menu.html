@@ -1,0 +1,21 @@
+<div id="menu" class="navbar">
+  <div class="toggle centralize">
+    <i class="fas fa-bars fa-2x"></i>
+  </div>
+  <div class="nav-content">
+  <div class="mega-logo">
+    <img src="./assets/megalogo.png"/>
+  </div>
+  <div id="nav-items">
+    {{#items}}
+    <div class="nav-item account-action">
+      <a
+      href="{{url}}"
+      class="capitalize"
+      >
+      {{title}}</a>
+    </div>
+    {{/items}}
+  </div>
+</div>
+</div>

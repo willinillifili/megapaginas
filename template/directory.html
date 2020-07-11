@@ -1,0 +1,32 @@
+<div id="directory" class="directory">
+  <div class="directory-header flex-row">BUSQUEDA POR CATEGORIAS</div>
+  <div class="directory-body flex-column">
+    <!--reference point for jquery "insertBefore"-->
+    <!--div class='directory-item letter-index flex-row'>
+      A
+      <span class="category-dropdown-arrow">
+        <img alt="dd-arrow" src="./assets/icons/dd-arrow.png"/>
+      </span>
+    </div>
+    <div id="cat-container-a" class="categories-container">
+    </div>
+    <div id="marker"></div>
+    <!--div class="directory-item flex-column">Categoria</div-->
+    {{#categories}}
+    <div class='directory-item letter-index flex-row'>
+    {{ index }}
+      <span class="category-dropdown-arrow">
+        <img alt="dd-arrow" src="./assets/icons/dd-arrow.png"/>
+      </span>
+    </div>
+    <div id="cat-container-{{index}}" class="categories-container">
+      {{#services}}
+      <div class='directory-item flex-column category-item'>
+        <a href="{{url}}">{{name}}({{quantity}})</a>
+      </div>
+      {{/services}}
+    </div>
+    {{/categories}}
+  </div>
+</div>
+</div>
