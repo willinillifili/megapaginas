@@ -34,12 +34,12 @@
     let expanded  = 0;
     $(".current-country").click(function() {
       if (!expanded) {
-        $(".country-dropdown").css("display", "block");
+        $(".country-dropdown").addClass("show-countries");
         expanded = 1;
       }
 
       else {
-        $(".country-dropdown").css("display", "none");
+        $(".country-dropdown").removeClass("show-countries");
         expanded = 0;
       }
     })

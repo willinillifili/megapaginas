@@ -143,18 +143,19 @@ $(document).ready(function() {
   );
 
   //mobile menu toggle
+	let toggle = 0;
   $(".toggle").click(function(e) {
     e.stopPropagation();
     let menu = $("#nav-items");
     let show = menu.attr("class");
-    if (show === "") {
-      menu.css("display", "flex");
-      menu.attr("class", "nav-items");
+    if (!toggle) {
       //menu.addClass("mobile-menu");
+			menu.addClass("from-left");
+			toggle = 1;
     }
     else {
-      menu.css("display", "none");
-      menu.attr("class", "");
+			menu.removeClass("from-left");
+			toggle = 0;
     }
   })
 });
@@ -194,12 +195,12 @@ $(document).ready(function() {
     let expanded  = 0;
     $(".current-country").click(function() {
       if (!expanded) {
-        $(".country-dropdown").css("display", "block");
+        $(".country-dropdown").addClass("show-countries");
         expanded = 1;
       }
 
       else {
-        $(".country-dropdown").css("display", "none");
+        $(".country-dropdown").removeClass("show-countries");
         expanded = 0;
       }
     })
